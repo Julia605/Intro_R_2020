@@ -22,3 +22,12 @@ group_by(site,blade_length)%>%
 laminaria%>%
   select(site,region,stipe_length)
   
+
+## Neat script
+# Always good to add comments next to each line. this helps you and the collaborator to understand what you are doing
+# Overall mark for day 1: 6/10
+
+
+
+
+
