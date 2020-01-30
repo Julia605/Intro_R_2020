@@ -1,0 +1,80 @@
+# ggplot
+# Mapping on day 3
+# 30th January 2020
+# Nthabiseng Thibeli
+
+
+ecklonia <- read_csv("data/ecklonia.csv")
+
+
+# create basic figure
+ggplot(data = ecklonia, aes(x = ID, y = stipe_mass)) +# inputting ecklonia data
+  geom_point() + # creating point graph (scatter)
+  geom_line(aes(group = site)) # linking this with a line for each site
+
+ggplot(data = ecklonia, aes(x = ID, y = stipe_mass, colour = site)) +
+  geom_point() +
+  geom_line(aes(group = site))
+
+
+ggplot(data = ecklonia, aes(x = ID, y = stipe_mass, colour = site)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme_bw()
+
+ggplot(data = ecklonia, aes(x = ID, y = stipe_mass, colour = site)) +
+  geom_point(aes(size = stipe_mass)) +
+  geom_smooth(method = "lm", size = 1.2)
+
+## Faceting
+library(tidyverse)
+library(ggpubr)
+
+ggplot(data = ecklonia, aes(x = ID, y = stipe_mass, colour = site)) +
+  geom_point() +
+  geom_smooth(method = "lm") + # Note the `+` sign here
+  facet_wrap(~site, ncol = 2) + # This is the line that creates the facets
+  labs(x = "ID", y = "Mass (g)")
+
+ecklonia_1 <- ecklonia %>% 
+  filter(ID == 9)
+
+line_1 <- ggplot(data = , aes(x = ID, y = stipe_mass, colour = site)) +
+  geom_point() +
+  geom_line(aes(group = site)) +
+  labs(x = "ID", y = "Mass (g)")+
+  ggplot(data = ecklonia, aes(x = ID, y = stipe_mass)) +
+  geom_point(aes(colour = cond)) +
+  scale_colour_gradientn(colours = c(#5BE8CF,#5FDAE5,#83C8EC,#ABB4E5,#CC9ECF,#DE8AAF,#E17D8A))
+    line_1
+    
+    lm_1 <- ggplot(data = ecklonia, aes(x = ID, y = stipe_mass, colour = site)) +
+      geom_point() +
+      geom_smooth(method = "gam") +
+      labs(x = "ID", y = "Mass (g)")
+    
+    lm_1
+    
+    
+    # Note that we are using ecklonia_1, not ecklonia
+    histogram_1 <- ggplot(data = ecklonia_1, aes(x = stipe_mass)) +
+      geom_histogram(aes(fill = site), position = "dodge", binwidth = 80) +
+      labs(x = " ID ", y = "Mass(g)")+
+      
+      
+      histogram_1
+    
+    # Note that we are using ecklonia_1, not ecklonia
+    box_1 <- ggplot(data = ecklonia, aes(x = ID, y = stipe_mass)) +
+      geom_boxplot(aes(fill = site)) +
+      labs(x = "ID", y = "stipe_mass (g)")
+    
+    box_1
+    
+    
+    
+    ggarrange(line_1, lm_1, histogram_1, box_1, 
+              ncol = 1, nrow = 4, # Set number of rows and columns
+              labels = c("A", "B", "C", "D"), # Label each figure
+              common.legend = TRUE) # Create common legend
+    
